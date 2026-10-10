@@ -1,0 +1,1205 @@
+<!-- Ambient Glowing Background Effect -->
+<div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+<div class="ambient-glow glow-bottom-right" aria-hidden="true"></div>
+
+<!-- ==================== HEADER & NAVBAR ==================== -->
+<header class="site-header" [class.scrolled]="isScrolled()" id="header">
+  <div class="container header-container">
+    <a (click)="scrollTo('hero')" class="brand-logo" role="button" tabindex="0" aria-label="Kartikey Rajput Home">
+      <span class="logo-bracket">&lt;</span><span class="logo-text">Kartikey</span><span class="logo-dot">.</span><span class="logo-bracket">/&gt;</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="main-nav" aria-label="Primary Navigation">
+      <ul class="nav-links">
+        <li>
+          <a (click)="scrollTo('hero')" class="nav-link" [class.active]="activeNavSection() === 'hero'" role="button" tabindex="0">
+            <i class="fa-solid fa-house"></i> Home
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('about')" class="nav-link" [class.active]="activeNavSection() === 'about'" role="button" tabindex="0">
+            <i class="fa-solid fa-user"></i> About
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('skills')" class="nav-link" [class.active]="activeNavSection() === 'skills'" role="button" tabindex="0">
+            <i class="fa-solid fa-code"></i> Skills
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('projects')" class="nav-link" [class.active]="activeNavSection() === 'projects'" role="button" tabindex="0">
+            <i class="fa-solid fa-folder-open"></i> Projects
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('experience')" class="nav-link" [class.active]="activeNavSection() === 'experience'" role="button" tabindex="0">
+            <i class="fa-solid fa-briefcase"></i> Experience
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('achievements')" class="nav-link" [class.active]="activeNavSection() === 'achievements'" role="button" tabindex="0">
+            <i class="fa-solid fa-award"></i> Certifications
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('education')" class="nav-link" [class.active]="activeNavSection() === 'education'" role="button" tabindex="0">
+            <i class="fa-solid fa-graduation-cap"></i> Education
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('github')" class="nav-link" [class.active]="activeNavSection() === 'github'" role="button" tabindex="0">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('resume')" class="nav-link" [class.active]="activeNavSection() === 'resume'" role="button" tabindex="0">
+            <i class="fa-solid fa-file-lines"></i> Resume
+          </a>
+        </li>
+        <li>
+          <a (click)="scrollTo('contact')" class="nav-link nav-contact-btn" [class.active]="activeNavSection() === 'contact'" role="button" tabindex="0">
+            <i class="fa-solid fa-paper-plane"></i> Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Header Actions: Theme Switcher & Mobile Toggle -->
+    <div class="header-actions">
+      <!-- Theme Toggle Switcher -->
+      <button (click)="toggleTheme()" class="theme-toggle-btn" aria-label="Toggle Dark and Light theme" [title]="'Switch to ' + (themeService.isDark() ? 'Light Mode (Orange & White)' : 'Dark Mode (Orange & Black)')">
+        @if (themeService.isDark()) {
+          <span class="theme-icon" style="color: #FFA500;"><i class="fa-solid fa-sun"></i></span>
+        } @else {
+          <span class="theme-icon" style="color: #1E293B;"><i class="fa-solid fa-moon"></i></span>
+        }
+      </button>
+
+      <!-- Quick Resume Download Button in Nav -->
+      <button (click)="downloadResume()" class="btn btn-sm btn-primary nav-action-btn">
+        <span>Resume</span> <i class="fa-solid fa-download"></i>
+      </button>
+
+      <!-- Mobile Menu Hamburger -->
+      <button (click)="toggleMobileDrawer()" class="mobile-menu-btn" [class.open]="isMobileDrawerOpen()" aria-label="Toggle navigation menu" [attr.aria-expanded]="isMobileDrawerOpen()">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-drawer" [class.open]="isMobileDrawerOpen()" id="mobileDrawer">
+  <div class="mobile-drawer-header">
+    <span class="drawer-logo">&lt;KR /&gt;</span>
+    <button (click)="closeMobileDrawer()" class="close-drawer-btn" aria-label="Close navigation menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <ul class="mobile-nav-links">
+    <li><a (click)="scrollTo('hero')" class="mobile-nav-link" [class.active]="activeNavSection() === 'hero'"><i class="fa-solid fa-house"></i> Home</a></li>
+    <li><a (click)="scrollTo('about')" class="mobile-nav-link" [class.active]="activeNavSection() === 'about'"><i class="fa-solid fa-user"></i> About Me</a></li>
+    <li><a (click)="scrollTo('skills')" class="mobile-nav-link" [class.active]="activeNavSection() === 'skills'"><i class="fa-solid fa-code"></i> Skills & Tech</a></li>
+    <li><a (click)="scrollTo('projects')" class="mobile-nav-link" [class.active]="activeNavSection() === 'projects'"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+    <li><a (click)="scrollTo('experience')" class="mobile-nav-link" [class.active]="activeNavSection() === 'experience'"><i class="fa-solid fa-briefcase"></i> Work Experience</a></li>
+    <li><a (click)="scrollTo('achievements')" class="mobile-nav-link" [class.active]="activeNavSection() === 'achievements'"><i class="fa-solid fa-award"></i> Certifications & Awards</a></li>
+    <li><a (click)="scrollTo('education')" class="mobile-nav-link" [class.active]="activeNavSection() === 'education'"><i class="fa-solid fa-graduation-cap"></i> Education</a></li>
+    <li><a (click)="scrollTo('github')" class="mobile-nav-link" [class.active]="activeNavSection() === 'github'"><i class="fa-brands fa-github"></i> GitHub Stats</a></li>
+    <li><a (click)="scrollTo('resume')" class="mobile-nav-link" [class.active]="activeNavSection() === 'resume'"><i class="fa-solid fa-file-lines"></i> Resume</a></li>
+    <li><a (click)="scrollTo('contact')" class="mobile-nav-link" [class.active]="activeNavSection() === 'contact'"><i class="fa-solid fa-envelope"></i> Contact Me</a></li>
+  </ul>
+  <div class="mobile-drawer-footer">
+    <div class="drawer-theme-toggle">
+      <span>Theme: {{ themeService.isDark() ? 'Dark (Orange & Black)' : 'Light (Orange & White)' }}</span>
+      <button (click)="toggleTheme()" class="btn btn-outline btn-sm">
+        Toggle
+      </button>
+    </div>
+    <a [href]="'mailto:rajputkartikey10@gmail.com'" class="drawer-email-btn">
+      <i class="fa-solid fa-envelope"></i> rajputkartikey10&#64;gmail.com
+    </a>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <!-- ==================== HERO / INTRODUCTION SECTION ==================== -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <!-- Status Pill -->
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span class="status-text">Available for Software Developer Roles & Internships</span>
+        </div>
+
+        <h1 class="hero-title">
+          Hi, I'm <span class="highlight-text">Kartikey Rajput</span>
+        </h1>
+
+        <div class="typewriter-container">
+          <span class="typewriter-prefix">I am a </span>
+          <span class="typewriter-text">{{ currentRoleText() }}</span>
+          <span class="typewriter-cursor">|</span>
+        </div>
+
+        <p class="hero-description">
+          Passionate Software Developer with a solid foundation in building high-performance web applications, scalable backends, and algorithmic problem-solving. Obsessed with clean code architecture, modern UI design, and continuous learning.
+        </p>
+
+        <div class="hero-cta-group">
+          <button (click)="scrollTo('projects')" class="btn btn-primary btn-glow">
+            <i class="fa-solid fa-rocket"></i> View My Work
+          </button>
+          <button (click)="scrollTo('contact')" class="btn btn-secondary">
+            <i class="fa-solid fa-envelope"></i> Contact Me
+          </button>
+          <button (click)="downloadResume()" class="btn btn-outline">
+            <i class="fa-solid fa-file-arrow-down"></i> Get Resume
+          </button>
+        </div>
+
+        <!-- Quick Socials Bar -->
+        <div class="hero-socials">
+          <span class="socials-label">Connect:</span>
+          <a [href]="'mailto:rajputkartikey10@gmail.com'" class="social-icon-btn" title="Email Kartikey" aria-label="Send Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="https://github.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="GitHub Profile" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn Profile" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://leetcode.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LeetCode Profile" aria-label="LeetCode">
+            <i class="fa-solid fa-code"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Twitter / X Profile" aria-label="Twitter">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual: Developer Card with Interactive Terminal -->
+      <div class="hero-visual">
+        <div class="developer-card">
+          <!-- Card Header / Terminal Dots -->
+          <div class="dev-card-header">
+            <div class="window-controls">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="window-title">kartikey_dev.json</div>
+            <div class="status-indicator">
+              <span class="pulse-indicator"></span> LIVE
+            </div>
+          </div>
+
+          <!-- Card Body: Code snippet representation -->
+          <div class="dev-card-body">
+            <pre class="code-block"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = &#123;
+  <span class="code-property">name</span>: <span class="code-string">"Kartikey Rajput"</span>,
+  <span class="code-property">role</span>: <span class="code-string">"Software Developer"</span>,
+  <span class="code-property">framework</span>: <span class="code-string">"Angular & Node.js"</span>,
+  <span class="code-property">email</span>: <span class="code-string">"rajputkartikey10&#64;gmail.com"</span>,
+  <span class="code-property">location</span>: <span class="code-string">"India"</span>,
+  <span class="code-property">coreSkills</span>: [
+    <span class="code-string">"Full-Stack Web Dev"</span>,
+    <span class="code-string">"DSA & Problem Solving"</span>,
+    <span class="code-string">"Cloud & Databases"</span>,
+    <span class="code-string">"System Architecture"</span>
+  ],
+  <span class="code-property">passion</span>: <span class="code-string">"Building scalable software 🚀"</span>,
+  <span class="code-property">status</span>: <span class="code-string">"Ready to innovate"</span>
+&#125;;</code></pre>
+          </div>
+
+          <!-- Card Footer: Metric Badges -->
+          <div class="dev-card-footer">
+            <div class="mini-stat">
+              <span class="mini-stat-num">15+</span>
+              <span class="mini-stat-label">Projects</span>
+            </div>
+            <div class="mini-stat-divider"></div>
+            <div class="mini-stat">
+              <span class="mini-stat-num">500+</span>
+              <span class="mini-stat-label">DSA Solved</span>
+            </div>
+            <div class="mini-stat-divider"></div>
+            <div class="mini-stat">
+              <span class="mini-stat-num">100%</span>
+              <span class="mini-stat-label">Committed</span>
+            </div>
+          </div>
+
+          <!-- Floating Tech Chips -->
+          <div class="floating-badge chip-react" aria-hidden="true">
+            <i class="devicon-angularjs-plain colored"></i> Angular 19
+          </div>
+          <div class="floating-badge chip-node" aria-hidden="true">
+            <i class="devicon-nodejs-plain colored"></i> Node.js
+          </div>
+          <div class="floating-badge chip-cpp" aria-hidden="true">
+            <i class="devicon-cplusplus-plain colored"></i> C++ & DSA
+          </div>
+          <div class="floating-badge chip-db" aria-hidden="true">
+            <i class="devicon-postgresql-plain colored"></i> SQL & Mongo
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ME SECTION ==================== -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-user-astronaut"></i> Biography</span>
+        <h2 class="section-title">About <span class="highlight-text">Me</span></h2>
+        <p class="section-subtitle">Get to know the developer behind the code, my core values, and what drives me.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card profile-info-card">
+          <div class="avatar-wrapper">
+            <div class="custom-avatar-graphic">
+              <div class="avatar-ring"></div>
+              <div class="avatar-inner">
+                <i class="fa-solid fa-laptop-code avatar-icon"></i>
+              </div>
+            </div>
+            <div class="avatar-badge">
+              <i class="fa-solid fa-code-commit"></i>
+            </div>
+          </div>
+
+          <h3 class="profile-name">Kartikey Rajput</h3>
+          <p class="profile-title">Software Developer & Engineering Enthusiast</p>
+          
+          <div class="profile-details-list">
+            <div class="detail-item">
+              <span class="detail-label"><i class="fa-solid fa-envelope detail-icon"></i> Email:</span>
+              <a [href]="'mailto:rajputkartikey10@gmail.com'" class="detail-value highlight-link">rajputkartikey10&#64;gmail.com</a>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label"><i class="fa-solid fa-map-pin detail-icon"></i> Location:</span>
+              <span class="detail-value">India (Open to Remote / Relocation)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label"><i class="fa-solid fa-language detail-icon"></i> Languages:</span>
+              <span class="detail-value">English, Hindi</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label"><i class="fa-solid fa-briefcase detail-icon"></i> Work Status:</span>
+              <span class="detail-value status-open">Actively Interviewing</span>
+            </div>
+          </div>
+
+          <div class="about-actions">
+            <button (click)="scrollTo('contact')" class="btn btn-primary btn-full">
+              <i class="fa-solid fa-handshake"></i> Let's Talk
+            </button>
+          </div>
+        </div>
+
+        <div class="about-card story-card">
+          <h3 class="story-title"><i class="fa-solid fa-terminal highlight-text"></i> My Journey & Philosophy</h3>
+          <p class="story-paragraph">
+            I am a driven <strong>Software Developer</strong> with a keen eye for designing intuitive systems and writing clean, scalable code. My journey in tech started with a relentless curiosity about how modern applications scale to serve millions of users seamlessly.
+          </p>
+          <p class="story-paragraph">
+            Over the years, I've honed my skills across the entire software development lifecycle—from whiteboard algorithmic problem-solving to crafting interactive responsive frontends, designing robust RESTful APIs, optimizing database schemas, and setting up CI/CD deployment pipelines.
+          </p>
+
+          <div class="highlights-grid">
+            <div class="highlight-box">
+              <div class="highlight-icon"><i class="fa-solid fa-brain"></i></div>
+              <div class="highlight-content">
+                <h4>Problem Solver</h4>
+                <p>Practiced algorithmic thinking with 500+ problems across LeetCode, CodeChef, and GeeksforGeeks.</p>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <div class="highlight-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <div class="highlight-content">
+                <h4>Full-Stack Capabilities</h4>
+                <p>Seamlessly bridging frontend elegance with robust, secure, and performant backend services.</p>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <div class="highlight-icon"><i class="fa-solid fa-cloud"></i></div>
+              <div class="highlight-content">
+                <h4>Modern Cloud & DevOps</h4>
+                <p>Deploying resilient architectures with Docker, AWS, GitHub Actions, and containerized workflows.</p>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <div class="highlight-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div class="highlight-content">
+                <h4>Fast & Agile Learner</h4>
+                <p>Always staying ahead of emerging web technologies, frameworks, and engineering standards.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS SECTION (GROUPED WITH SYMBOLS) ==================== -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-microchip"></i> Technical Proficiency</span>
+        <h2 class="section-title">My <span class="highlight-text">Skills</span> & Expertise</h2>
+        <p class="section-subtitle">Categorized breakdown of programming languages, frameworks, cloud databases, tools, and computer science fundamentals.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs-wrapper">
+        <div class="filter-tabs" role="tablist" aria-label="Skills Categories">
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'all'" (click)="filterSkills('all')" role="tab">
+            <i class="fa-solid fa-border-all"></i> All Skills
+          </button>
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'languages'" (click)="filterSkills('languages')" role="tab">
+            <i class="fa-solid fa-code"></i> Group Skills (Languages)
+          </button>
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'frameworks'" (click)="filterSkills('frameworks')" role="tab">
+            <i class="fa-solid fa-cubes"></i> Frameworks & Libs
+          </button>
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'database-cloud'" (click)="filterSkills('database-cloud')" role="tab">
+            <i class="fa-solid fa-database"></i> Database & Cloud
+          </button>
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'dev-tools'" (click)="filterSkills('dev-tools')" role="tab">
+            <i class="fa-solid fa-screwdriver-wrench"></i> Developer Tools
+          </button>
+          <button class="filter-tab" [class.active]="selectedSkillCategory() === 'core-concepts'" (click)="filterSkills('core-concepts')" role="tab">
+            <i class="fa-solid fa-graduation-cap"></i> Core Concepts
+          </button>
+        </div>
+      </div>
+
+      <!-- Skills Display Container -->
+      <div class="skills-display-container">
+        @for (group of skillGroups; track group.id) {
+          @if (selectedSkillCategory() === 'all' || selectedSkillCategory() === group.id) {
+            <div class="skill-category-block">
+              <div class="category-block-header">
+                <div class="category-icon-title">
+                  <i [class]="group.icon + ' highlight-text'"></i>
+                  <h3>{{ group.title }}</h3>
+                </div>
+                <span class="category-count">{{ group.skills.length }} Skills</span>
+              </div>
+              <div class="skills-grid">
+                @for (skill of group.skills; track skill.name) {
+                  <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                      <i [class]="skill.iconClass"></i>
+                    </div>
+                    <div class="skill-meta">
+                      <span class="skill-name">{{ skill.name }}</span>
+                      <span class="skill-badge" [class]="skill.proficiencyClass">{{ skill.proficiency }}</span>
+                    </div>
+                    <p class="skill-desc">{{ skill.description }}</p>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS SECTION ==================== -->
+  <section class="section projects-section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-laptop-code"></i> Portfolio Work</span>
+        <h2 class="section-title">Featured <span class="highlight-text">Projects</span></h2>
+        <p class="section-subtitle">Real-world applications showcasing scalable backend architectures, interactive interfaces, and robust engineering.</p>
+      </div>
+
+      <!-- Project Filter Controls -->
+      <div class="filter-tabs-wrapper">
+        <div class="filter-tabs" role="tablist" aria-label="Project Categories">
+          <button class="filter-tab" [class.active]="selectedProjectCategory() === 'all'" (click)="filterProjects('all')">All Projects</button>
+          <button class="filter-tab" [class.active]="selectedProjectCategory() === 'fullstack'" (click)="filterProjects('fullstack')">Full Stack</button>
+          <button class="filter-tab" [class.active]="selectedProjectCategory() === 'frontend'" (click)="filterProjects('frontend')">Frontend</button>
+          <button class="filter-tab" [class.active]="selectedProjectCategory() === 'backend'" (click)="filterProjects('backend')">Backend & API</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid">
+        @for (project of filteredProjects(); track project.id) {
+          <article class="project-card">
+            <div class="project-preview">
+              <div class="project-img-placeholder" [class]="project.gradientClass">
+                <div class="preview-overlay-content">
+                  <i [class]="project.previewIcon + ' preview-big-icon'"></i>
+                  <span class="preview-tag">{{ project.tag }}</span>
+                </div>
+              </div>
+              <div class="project-badges">
+                @if (project.featured) {
+                  <span class="badge featured-badge"><i class="fa-solid fa-star"></i> Featured</span>
+                }
+                <span class="badge status-live"><i class="fa-solid fa-circle-dot"></i> Live Demo</span>
+              </div>
+            </div>
+            
+            <div class="project-content">
+              <div class="project-tech-stack">
+                @for (tech of project.techStack; track tech) {
+                  <span class="tech-pill">{{ tech }}</span>
+                }
+              </div>
+
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-about">{{ project.description }}</p>
+
+              <div class="project-actions">
+                <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="View Source Code on GitHub">
+                  <i class="fa-brands fa-github"></i> GitHub Code
+                </a>
+                <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" title="Visit Live Application">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                </a>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WORK EXPERIENCE SECTION ==================== -->
+  <section class="section experience-section" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Career Journey</span>
+        <h2 class="section-title">Work <span class="highlight-text">Experience</span> & Internships</h2>
+        <p class="section-subtitle">Real-world professional impact, engineering leadership, and official internship certificates.</p>
+      </div>
+
+      <div class="timeline">
+        @for (exp of experiences; track exp.id) {
+          <div class="timeline-item">
+            <div class="timeline-dot">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="company-brand">
+                  <div class="company-logo-badge" [class]="exp.companyLogoClass">
+                    <i [class]="exp.companyLogoIcon"></i>
+                  </div>
+                  <div class="company-meta">
+                    <h3 class="role-title">{{ exp.role }}</h3>
+                    <h4 class="company-name">{{ exp.company }} <span class="company-tag">{{ exp.companyTag }}</span></h4>
+                  </div>
+                </div>
+                <div class="timeline-date-badge">
+                  <i class="fa-regular fa-calendar"></i> {{ exp.period }}
+                </div>
+              </div>
+
+              <div class="timeline-body">
+                <p class="experience-intro">{{ exp.intro }}</p>
+                <ul class="experience-bullet-list">
+                  @for (bullet of exp.bulletPoints; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+
+                <div class="experience-tech-pills">
+                  @for (tech of exp.techStack; track tech) {
+                    <span class="tech-pill">{{ tech }}</span>
+                  }
+                </div>
+              </div>
+
+              <div class="timeline-footer">
+                @if (exp.certificate) {
+                  <button (click)="openCertificateModal(exp.certificate)" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-certificate highlight-text"></i> View Completion Certificate
+                  </button>
+                }
+                <span class="internship-status">
+                  <i class="fa-solid fa-circle-check text-success"></i> {{ exp.statusBadge }}
+                </span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ACHIEVEMENTS & CERTIFICATIONS SECTION ==================== -->
+  <section class="section achievements-section" id="achievements">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-award"></i> Honors & Credentials</span>
+        <h2 class="section-title">Achievements & <span class="highlight-text">Certifications</span></h2>
+        <p class="section-subtitle">Verified industry certifications, competitive coding achievements, and academic milestones.</p>
+      </div>
+
+      <div class="achievements-grid">
+        @for (ach of achievements; track ach.id) {
+          <div class="achievement-card">
+            <div class="achievement-banner" [class]="ach.bannerClass">
+              <div class="cert-watermark">
+                <i [class]="ach.watermarkIcon"></i>
+              </div>
+              <div class="cert-pill"><i class="fa-solid fa-circle-check"></i> {{ ach.pillText }}</div>
+            </div>
+            <div class="achievement-content">
+              <div class="achievement-issuer">
+                <i [class]="ach.issuerIcon"></i> {{ ach.issuer }}
+              </div>
+              <h3 class="achievement-title">{{ ach.title }}</h3>
+              <p class="achievement-desc">{{ ach.description }}</p>
+              <div class="achievement-meta">
+                <span class="cert-date"><i class="fa-regular fa-calendar"></i> Issued {{ ach.issueDate }}</span>
+                <span class="cert-id">{{ ach.credentialId }}</span>
+              </div>
+              <div class="achievement-card-actions">
+                @if (ach.externalLink) {
+                  <a [href]="ach.externalLink" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> View Profile
+                  </a>
+                } @else {
+                  <button (click)="openCertificateModal(ach.certificateDetails)" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-expand"></i> View Certificate
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EDUCATION SECTION ==================== -->
+  <section class="section education-section" id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Background</span>
+        <h2 class="section-title">My <span class="highlight-text">Education</span></h2>
+        <p class="section-subtitle">Academic degrees, technical coursework, and foundational computer science study.</p>
+      </div>
+
+      <div class="education-grid">
+        @for (edu of educationList; track edu.degree) {
+          <div class="education-card">
+            <div class="edu-icon-col">
+              <div class="edu-icon-circle">
+                <i class="fa-solid fa-building-columns"></i>
+              </div>
+              @if (edu.stats) {
+                <div class="edu-line"></div>
+              }
+            </div>
+            <div class="edu-content-col">
+              <div class="edu-header">
+                <div>
+                  <h3 class="degree-title">{{ edu.degree }}</h3>
+                  <h4 class="branch-title">{{ edu.branch }}</h4>
+                  <p class="institution-name"><i class="fa-solid fa-location-dot highlight-text"></i> {{ edu.institution }}</p>
+                </div>
+                <div class="edu-period-badge">
+                  {{ edu.period }}
+                </div>
+              </div>
+
+              <div class="edu-details">
+                <p class="edu-summary">{{ edu.summary }}</p>
+
+                <div class="edu-coursework">
+                  <span class="coursework-label">Key Technical Coursework:</span>
+                  <div class="coursework-tags">
+                    @for (course of edu.coursework; track course) {
+                      <span class="course-tag">{{ course }}</span>
+                    }
+                  </div>
+                </div>
+
+                @if (edu.stats) {
+                  <div class="edu-achievements-list">
+                    @for (stat of edu.stats; track stat.label) {
+                      <div class="edu-stat-item">
+                        <span class="stat-num">{{ stat.num }}</span>
+                        <span class="stat-lbl">{{ stat.label }}</span>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GITHUB STATS & ACTIVITY GRAPH ==================== -->
+  <section class="section github-section" id="github">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-brands fa-github"></i> Open Source & Code Activity</span>
+        <h2 class="section-title">GitHub <span class="highlight-text">Activity</span> & Statistics</h2>
+        <p class="section-subtitle">Real-time repository statistics, contribution streaks, and top programming languages.</p>
+      </div>
+
+      <!-- Dynamic GitHub Username Customizer Bar -->
+      <div class="github-config-bar">
+        <div class="gh-input-group">
+          <label for="ghUsernameInput"><i class="fa-brands fa-github"></i> GitHub Username:</label>
+          <input type="text" id="ghUsernameInput" [(ngModel)]="githubInput" (keyup.enter)="updateGithubUsername()" placeholder="Enter your GitHub username...">
+          <button (click)="updateGithubUsername()" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-arrows-rotate"></i> Update Stats
+          </button>
+        </div>
+        <p class="gh-hint-text">
+          Tip: Enter your GitHub handle above and click Update to preview your live contribution graphs!
+        </p>
+      </div>
+
+      <!-- GitHub Metrics Cards Container -->
+      <div class="github-cards-grid">
+        <!-- Card 1: Overview Stats -->
+        <div class="github-stat-card">
+          <div class="gh-card-header">
+            <div class="gh-title"><i class="fa-solid fa-chart-line highlight-text"></i> Repository Statistics</div>
+            <a [href]="'https://github.com/' + githubUsername()" target="_blank" rel="noopener noreferrer" class="gh-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <div class="gh-img-frame">
+            <img [src]="githubStatsUrl()" (error)="onImgError($event)" alt="GitHub Stats" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Card 2: Streak Stats -->
+        <div class="github-stat-card">
+          <div class="gh-card-header">
+            <div class="gh-title"><i class="fa-solid fa-fire highlight-text"></i> Contribution Streak</div>
+            <a [href]="'https://github.com/' + githubUsername()" target="_blank" rel="noopener noreferrer" class="gh-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <div class="gh-img-frame">
+            <img [src]="githubStreakUrl()" (error)="onImgError($event)" alt="GitHub Streak Stats" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Card 3: Top Languages Graph -->
+        <div class="github-stat-card">
+          <div class="gh-card-header">
+            <div class="gh-title"><i class="fa-solid fa-code highlight-text"></i> Most Used Languages</div>
+            <a [href]="'https://github.com/' + githubUsername()" target="_blank" rel="noopener noreferrer" class="gh-link">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <div class="gh-img-frame">
+            <img [src]="githubLangsUrl()" (error)="onImgError($event)" alt="Top Languages" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <div class="gh-cta-box">
+        <p>Want to inspect full commit histories, open-source pull requests, or explore code repositories?</p>
+        <a [href]="'https://github.com/' + githubUsername()" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <i class="fa-brands fa-github"></i> Visit My GitHub Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RESUME SECTION (VIEW & DOWNLOAD) ==================== -->
+  <section class="section resume-section" id="resume">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-file-lines"></i> Curriculum Vitae</span>
+        <h2 class="section-title">My <span class="highlight-text">Resume</span></h2>
+        <p class="section-subtitle">Download my official ATS-friendly resume or view detailed technical highlights right here.</p>
+      </div>
+
+      <div class="resume-wrapper">
+        <div class="resume-card-preview">
+          <div class="resume-badge-row">
+            <span class="badge featured-badge"><i class="fa-solid fa-check"></i> ATS Optimized</span>
+            <span class="badge badge-accent"><i class="fa-solid fa-clock"></i> Updated October 2026</span>
+            <span class="badge"><i class="fa-solid fa-shield"></i> Verified Format</span>
+          </div>
+
+          <div class="resume-header-preview">
+            <h3 class="resume-name">Kartikey Rajput</h3>
+            <p class="resume-role">Software Developer | Full-Stack Engineer | Problem Solver</p>
+            <div class="resume-quick-contacts">
+              <span><i class="fa-solid fa-envelope highlight-text"></i> rajputkartikey10&#64;gmail.com</span>
+              <span><i class="fa-brands fa-linkedin highlight-text"></i> LinkedIn Profile</span>
+              <span><i class="fa-brands fa-github highlight-text"></i> GitHub Repositories</span>
+            </div>
+          </div>
+
+          <div class="resume-summary-preview">
+            <h4>Professional Summary</h4>
+            <p>
+              Forward-thinking Software Developer experienced in modern web frameworks (Angular, React, Node.js), robust relational & NoSQL databases, and cloud fundamentals. Possesses a deep foundation in Data Structures, Algorithms, Object-Oriented Design, and System Architecture with a proven track record of delivering scalable web platforms.
+            </p>
+          </div>
+
+          <div class="resume-skills-preview">
+            <h4>Core Competencies</h4>
+            <div class="resume-pill-cloud">
+              <span>C++ / Python / JavaScript / TypeScript</span>
+              <span>Angular / Node.js / Express / Next.js</span>
+              <span>MongoDB / PostgreSQL / Redis / SQL</span>
+              <span>Docker / AWS / Git & GitHub / CI/CD</span>
+              <span>DSA / OOP / System Design / REST APIs</span>
+            </div>
+          </div>
+
+          <div class="resume-actions-group">
+            <button (click)="downloadResume()" class="btn btn-primary btn-glow">
+              <i class="fa-solid fa-download"></i> Download Resume (PDF)
+            </button>
+            <button (click)="openResumeModal()" class="btn btn-secondary">
+              <i class="fa-solid fa-eye"></i> View Full Interactive Resume
+            </button>
+            <button (click)="copyShortBio()" class="btn btn-outline" title="Copy ATS Bio to Clipboard">
+              <i class="fa-solid fa-copy"></i> Copy Short Bio
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ME SECTION ==================== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> Get In Touch</span>
+        <h2 class="section-title">Contact <span class="highlight-text">Me</span></h2>
+        <p class="section-subtitle">Have an exciting opportunity, a collaborative idea, or just want to chat tech? Let's connect!</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left Column: Contact Cards & Email Highlight -->
+        <div class="contact-info-col">
+          <!-- Primary Highlight Email Card -->
+          <div class="contact-card primary-contact-card">
+            <div class="contact-icon-large">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <div class="primary-contact-content">
+              <span class="contact-label">Direct Email (Preferred)</span>
+              <a [href]="'mailto:rajputkartikey10@gmail.com'" class="primary-email-link">
+                rajputkartikey10&#64;gmail.com
+              </a>
+              <p class="contact-note">Guaranteed response within 24 hours.</p>
+              <div class="email-btn-row">
+                <a [href]="'mailto:rajputkartikey10@gmail.com'" class="btn btn-primary btn-sm">
+                  <i class="fa-solid fa-paper-plane"></i> Send Direct Mail
+                </a>
+                <button (click)="copyEmail()" class="btn btn-outline btn-sm" title="Copy email address to clipboard">
+                  <i class="fa-solid fa-copy"></i> Copy Email
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- More Contacts Info Grid -->
+          <div class="more-contacts-grid">
+            <div class="contact-subcard">
+              <div class="subcard-icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="subcard-info">
+                <span class="subcard-title">Phone / WhatsApp</span>
+                <a href="tel:+919876543210" class="subcard-val">+91 [Add Phone / WhatsApp]</a>
+              </div>
+            </div>
+
+            <div class="contact-subcard">
+              <div class="subcard-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+              <div class="subcard-info">
+                <span class="subcard-title">Location</span>
+                <span class="subcard-val">India (Open to Remote / Relocate)</span>
+              </div>
+            </div>
+
+            <div class="contact-subcard">
+              <div class="subcard-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div class="subcard-info">
+                <span class="subcard-title">LinkedIn</span>
+                <a href="https://linkedin.com/in/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="subcard-val">in/kartikey-rajput</a>
+              </div>
+            </div>
+
+            <div class="contact-subcard">
+              <div class="subcard-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="subcard-info">
+                <span class="subcard-title">GitHub</span>
+                <a href="https://github.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="subcard-val">&#64;kartikey-rajput</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Channels Bar -->
+          <div class="social-channels-bar">
+            <span class="channels-title">Follow & Network:</span>
+            <div class="channel-icons">
+              <a href="https://github.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="ch-link" title="GitHub" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="https://linkedin.com/in/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="ch-link" title="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://leetcode.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" class="ch-link" title="LeetCode" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="ch-link" title="Twitter / X" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="ch-link" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Send Message Form -->
+        <div class="contact-form-col">
+          <div class="form-container-card">
+            <div class="form-header">
+              <h3><i class="fa-solid fa-paper-plane highlight-text"></i> Send a Message</h3>
+              <p>Fill out the form below, and I will be notified immediately!</p>
+            </div>
+
+            <form #cForm="ngForm" (ngSubmit)="submitContactForm(cForm)" class="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="senderName">Your Name <span class="required">*</span></label>
+                  <div class="input-with-icon">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="senderName" name="name" [(ngModel)]="contactFormModel.name" #nameRef="ngModel" placeholder="John Doe" required>
+                  </div>
+                  @if (nameRef.invalid && nameRef.touched) {
+                    <span class="form-error">Please enter your name</span>
+                  }
+                </div>
+
+                <div class="form-group">
+                  <label for="senderEmail">Your Email <span class="required">*</span></label>
+                  <div class="input-with-icon">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input type="email" id="senderEmail" name="email" [(ngModel)]="contactFormModel.email" #emailRef="ngModel" placeholder="john@example.com" required email>
+                  </div>
+                  @if (emailRef.invalid && emailRef.touched) {
+                    <span class="form-error">Please enter a valid email</span>
+                  }
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="messageSubject">Subject <span class="required">*</span></label>
+                <div class="input-with-icon">
+                  <i class="fa-solid fa-heading input-icon"></i>
+                  <input type="text" id="messageSubject" name="subject" [(ngModel)]="contactFormModel.subject" #subRef="ngModel" placeholder="Software Developer Role / Project Collaboration" required>
+                </div>
+                @if (subRef.invalid && subRef.touched) {
+                  <span class="form-error">Please enter a subject</span>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Your Message <span class="required">*</span></label>
+                <div class="input-with-icon textarea-icon-wrapper">
+                  <i class="fa-solid fa-message input-icon"></i>
+                  <textarea id="senderMessage" name="message" [(ngModel)]="contactFormModel.message" #msgRef="ngModel" rows="5" placeholder="Hi Kartikey, I came across your portfolio and wanted to discuss..." required></textarea>
+                </div>
+                @if (msgRef.invalid && msgRef.touched) {
+                  <span class="form-error">Please write a message</span>
+                }
+              </div>
+
+              <button type="submit" [disabled]="isSubmittingContact()" class="btn btn-primary btn-full btn-glow">
+                @if (!isSubmittingContact()) {
+                  <span><i class="fa-solid fa-paper-plane"></i> Send Message Now</span>
+                } @else {
+                  <span><i class="fa-solid fa-circle-notch fa-spin"></i> Sending Notification...</span>
+                }
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a (click)="scrollTo('hero')" class="brand-logo" role="button" tabindex="0">
+          <span class="logo-bracket">&lt;</span><span class="logo-text">Kartikey</span><span class="logo-dot">.</span><span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-tagline">
+          Building software with passion, precision, and modern engineering standards.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Quick Navigation</h4>
+        <ul class="footer-nav-list">
+          <li><a (click)="scrollTo('hero')" role="button" tabindex="0">Home</a></li>
+          <li><a (click)="scrollTo('about')" role="button" tabindex="0">About</a></li>
+          <li><a (click)="scrollTo('skills')" role="button" tabindex="0">Skills</a></li>
+          <li><a (click)="scrollTo('projects')" role="button" tabindex="0">Projects</a></li>
+          <li><a (click)="scrollTo('experience')" role="button" tabindex="0">Experience</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-col-title">Portfolio Sections</h4>
+        <ul class="footer-nav-list">
+          <li><a (click)="scrollTo('achievements')" role="button" tabindex="0">Certifications</a></li>
+          <li><a (click)="scrollTo('education')" role="button" tabindex="0">Education</a></li>
+          <li><a (click)="scrollTo('github')" role="button" tabindex="0">GitHub Stats</a></li>
+          <li><a (click)="scrollTo('resume')" role="button" tabindex="0">Resume</a></li>
+          <li><a (click)="scrollTo('contact')" role="button" tabindex="0">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact-col">
+        <h4 class="footer-col-title">Direct Connection</h4>
+        <p class="footer-email-txt">
+          <i class="fa-solid fa-envelope highlight-text"></i> <a [href]="'mailto:rajputkartikey10@gmail.com'">rajputkartikey10&#64;gmail.com</a>
+        </p>
+        <div class="footer-social-row">
+          <a href="https://github.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/kartikey-rajput" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://leetcode.com/kartikey-rajput" target="_blank" rel="noopener noreferrer" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a>
+          <a [href]="'mailto:rajputkartikey10@gmail.com'" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright-text">
+        &copy; {{ currentYear }} <strong>Kartikey Rajput</strong>. Built with Angular 19, TypeScript & Vanilla CSS.
+      </p>
+      <div class="footer-bottom-badges">
+        <span class="theme-mode-badge"><i class="fa-solid fa-palette"></i> Orange & Dark / Light Edition</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== BACK TO TOP BUTTON ==================== -->
+<button (click)="scrollToTop()" class="back-to-top-btn" [class.visible]="showBackToTop()" aria-label="Back to top" title="Back to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- ==================== TOAST NOTIFICATIONS ==================== -->
+<div class="toast-container" aria-live="polite">
+  @for (toast of toasts(); track toast.id) {
+    <div class="toast toast-success">
+      <i class="fa-solid fa-circle-check"></i>
+      <span>{{ toast.message }}</span>
+    </div>
+  }
+</div>
+
+<!-- ==================== CERTIFICATE VIEWER MODAL ==================== -->
+@if (activeCertificate()) {
+  <div class="modal-overlay open" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-badge-row">
+          <span class="badge featured-badge"><i class="fa-solid fa-award"></i> {{ activeCertificate()!.badge }}</span>
+        </div>
+        <button (click)="closeCertificateModal()" class="modal-close-btn" aria-label="Close Certificate Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body cert-modal-body">
+        <div class="rendered-certificate">
+          <div class="cert-border-outer">
+            <div class="cert-border-inner">
+              <div class="cert-watermark-bg"><i class="fa-solid fa-certificate"></i></div>
+              
+              <div class="cert-doc-header">
+                <div class="cert-gold-seal"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4 class="cert-doc-type">OFFICIAL COMPLETION & MERIT CERTIFICATE</h4>
+                <div class="cert-doc-divider"></div>
+              </div>
+
+              <div class="cert-doc-body">
+                <p class="cert-presented-to">This is proudly presented to</p>
+                <h2 class="cert-recipient-name">KARTIKEY RAJPUT</h2>
+                <p class="cert-doc-reason">in recognition of outstanding achievement and successful completion of</p>
+                <h3 class="cert-doc-program">{{ activeCertificate()!.title }}</h3>
+                <p class="cert-doc-desc">{{ activeCertificate()!.description }}</p>
+              </div>
+
+              <div class="cert-doc-footer">
+                <div class="cert-sign-col">
+                  <div class="cert-sign-line"></div>
+                  <span class="cert-signer">{{ activeCertificate()!.organization }}</span>
+                  <span class="cert-sign-role">Authorized Program Director</span>
+                </div>
+                <div class="cert-id-col">
+                  <span class="cert-verification-text">Verified ID: <strong>{{ activeCertificate()!.credentialId }}</strong></span>
+                  <span class="cert-issue-date">Date: <strong>{{ activeCertificate()!.issueDate }}</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="printCertificate()" class="btn btn-outline btn-sm">
+          <i class="fa-solid fa-print"></i> Print / Save Certificate
+        </button>
+        <button (click)="closeCertificateModal()" class="btn btn-secondary btn-sm">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ==================== FULL RESUME MODAL VIEWER ==================== -->
+@if (isResumeModalOpen()) {
+  <div class="modal-overlay open" role="dialog" aria-modal="true">
+    <div class="modal-card resume-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3><i class="fa-solid fa-file-pdf highlight-text"></i> Kartikey Rajput - Software Developer Resume</h3>
+        </div>
+        <button (click)="closeResumeModal()" class="modal-close-btn" aria-label="Close Resume Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body resume-modal-body" id="printableResumeArea">
+        <div class="paper-resume">
+          <!-- Resume Header -->
+          <div class="paper-header">
+            <h1 class="paper-name">Kartikey Rajput</h1>
+            <p class="paper-subtitle">Software Developer | Full Stack Web Engineer</p>
+            <div class="paper-contact-links">
+              <span><i class="fa-solid fa-envelope"></i> rajputkartikey10&#64;gmail.com</span>
+              <span><i class="fa-brands fa-linkedin"></i> linkedin.com/in/kartikey-rajput</span>
+              <span><i class="fa-brands fa-github"></i> github.com/kartikey-rajput</span>
+              <span><i class="fa-solid fa-location-dot"></i> India</span>
+            </div>
+          </div>
+
+          <!-- Section: Professional Summary -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">PROFESSIONAL SUMMARY</h2>
+            <p class="paper-text">
+              Results-oriented Software Developer with hands-on expertise across modern JavaScript/TypeScript frameworks (Angular, Node.js), relational & NoSQL databases, and cloud technologies. Proven background in solving 500+ algorithmic challenges on competitive coding platforms, designing scalable REST APIs, and building intuitive user experiences.
+            </p>
+          </div>
+
+          <!-- Section: Technical Skills -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">TECHNICAL SKILLS</h2>
+            <div class="paper-skills-grid">
+              <div class="paper-skill-row"><strong>Languages:</strong> C++, Python, JavaScript (ES6+), TypeScript, Java, SQL, HTML5, CSS3</div>
+              <div class="paper-skill-row"><strong>Frameworks & Libraries:</strong> Angular, Next.js, Node.js, Express.js, Redux Toolkit, Tailwind CSS, Bootstrap</div>
+              <div class="paper-skill-row"><strong>Databases & Cloud:</strong> MongoDB, PostgreSQL, MySQL, Redis, AWS (S3, EC2), Firebase, Supabase</div>
+              <div class="paper-skill-row"><strong>Developer Tools:</strong> Git, GitHub, Docker, Postman, VS Code, Linux CLI, Vite, Webpack, npm</div>
+              <div class="paper-skill-row"><strong>Core CS Concepts:</strong> Data Structures & Algorithms (DSA), Object-Oriented Programming (OOP), System Design, REST APIs, DBMS, Operating Systems, Computer Networks</div>
+            </div>
+          </div>
+
+          <!-- Section: Work Experience -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">WORK EXPERIENCE</h2>
+            <div class="paper-exp-item">
+              <div class="paper-exp-header">
+                <strong>Software Developer Intern — TechCorp Innovations</strong>
+                <span>Jun 2024 – Nov 2024</span>
+              </div>
+              <ul class="paper-bullets">
+                <li>Architected 12+ RESTful microservice API endpoints in Node.js & Express, boosting latency by 32%.</li>
+                <li>Built dynamic responsive client interfaces using Angular, cutting bounce rate by 20%.</li>
+                <li>Designed optimized MongoDB aggregations and indexing schemas to handle heavy query loads.</li>
+              </ul>
+            </div>
+
+            <div class="paper-exp-item">
+              <div class="paper-exp-header">
+                <strong>Full Stack Web Dev Intern — Apex Digital Solutions</strong>
+                <span>Jan 2024 – May 2024</span>
+              </div>
+              <ul class="paper-bullets">
+                <li>Developed administrative monitoring dashboards using Angular and integrated third-party payment APIs.</li>
+                <li>Fixed 35+ responsiveness and cross-browser quirks while boosting lighthouse performance to 95+.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Section: Key Projects -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">PROJECTS</h2>
+            <div class="paper-exp-item">
+              <div class="paper-exp-header">
+                <strong>DevSync: Real-Time Collaborative Workspace (Angular, Node, Socket.io, Mongo)</strong>
+                <span>2024</span>
+              </div>
+              <p class="paper-text">Engineered real-time concurrent editor with low-latency WebSockets, chat rooms, and role-based permissions.</p>
+            </div>
+            <div class="paper-exp-item">
+              <div class="paper-exp-header">
+                <strong>OmniMarket: High-Throughput E-Commerce Platform (Angular, Postgres, Stripe)</strong>
+                <span>2024</span>
+              </div>
+              <p class="paper-text">Implemented end-to-end purchasing workflow, instant full-text search, and automated inventory sync.</p>
+            </div>
+          </div>
+
+          <!-- Section: Education -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">EDUCATION</h2>
+            <div class="paper-exp-header">
+              <strong>B.Tech in Computer Science and Engineering — 8.5+ CGPA</strong>
+              <span>2021 – 2025</span>
+            </div>
+          </div>
+
+          <!-- Section: Certifications & Achievements -->
+          <div class="paper-section">
+            <h2 class="paper-section-title">CERTIFICATIONS & ACHIEVEMENTS</h2>
+            <ul class="paper-bullets">
+              <li>AWS Certified Cloud Practitioner (2024)</li>
+              <li>Meta Full Stack Professional Specialization (2024)</li>
+              <li>LeetCode: 500+ Problems Solved | Top 15% Contest Rating</li>
+              <li>HackerRank Problem Solving (Gold Badge)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="printResume()" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-print"></i> Print / Save as PDF
+        </button>
+        <button (click)="closeResumeModal()" class="btn btn-secondary btn-sm">
+          Close Preview
+        </button>
+      </div>
+    </div>
+  </div>
+}
