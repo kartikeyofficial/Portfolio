@@ -57,19 +57,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Typewriter roles
   private readonly roles: string[] = [
-    'Software Developer',
-    'Full-Stack Web Engineer',
-    'Angular & Node.js Specialist',
-    'Problem Solver (500+ DSA)',
-    'Cloud & Systems Enthusiast'
+    'Full-Stack JAVA Developer',
+    'Angular & Spring Boot Specialist',
+    'Forward Deployed Engineer',
+    'Problem Solver (150+ DSA)',
+    'Cloud & Systems Engineer'
   ];
   readonly currentRoleText = signal<string>('Software Developer');
   private typewriterInterval: any;
   private typewriterTimeout: any;
 
   // GitHub Stats Configuration
-  readonly githubUsername = signal<string>('kartikey-rajput');
-  githubInput: string = 'kartikey-rajput';
+  readonly githubUsername = signal<string>('kartikeyofficial');
+  githubInput: string = 'kartikeyofficial';
 
   readonly githubStatsUrl = computed<string>(() => {
     const user = this.githubUsername();
