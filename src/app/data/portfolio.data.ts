@@ -3,17 +3,18 @@ import { SkillGroup, Project, Experience, Achievement, EducationItem } from '../
 export const SKILL_GROUPS: SkillGroup[] = [
   {
     id: 'languages',
-    title: 'Group Skills & Programming Languages',
+    title: 'Skills & Programming Languages',
     icon: 'fa-solid fa-code',
     skills: [
       {
-        name: 'C++',
+        name: 'Java',
         category: 'languages',
-        iconClass: 'devicon-cplusplus-plain colored',
-        proficiency: 'Advanced',
-        proficiencyClass: 'proficiency-expert',
-        description: 'DSA, STL, High Performance Algorithms'
+        iconClass: 'devicon-java-plain colored',
+        proficiency: 'Proficient',
+        proficiencyClass: 'proficiency-advanced',
+        description: 'Core Java, OOP Concepts, Collections'
       },
+      
       {
         name: 'Python',
         category: 'languages',
@@ -23,12 +24,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
         description: 'Backends, Scripting, Automation'
       },
       {
-        name: 'JavaScript (ES6+)',
+        name: 'SQL',
         category: 'languages',
-        iconClass: 'devicon-javascript-plain colored',
-        proficiency: 'Expert',
+        iconClass: 'devicon-mysql-plain colored',
+        proficiency: 'Advanced',
         proficiencyClass: 'proficiency-expert',
-        description: 'Asynchronous Programming, Event Loop, DOM'
+        description: 'Complex Queries, Indexing, Joins, Triggers'
       },
       {
         name: 'TypeScript',
@@ -37,22 +38,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
         proficiency: 'Proficient',
         proficiencyClass: 'proficiency-advanced',
         description: 'Static Typing, Interfaces, Generics, OOP'
-      },
-      {
-        name: 'Java',
-        category: 'languages',
-        iconClass: 'devicon-java-plain colored',
-        proficiency: 'Proficient',
-        proficiencyClass: 'proficiency-advanced',
-        description: 'Core Java, OOP Concepts, Collections'
-      },
-      {
-        name: 'SQL',
-        category: 'languages',
-        iconClass: 'devicon-mysql-plain colored',
-        proficiency: 'Advanced',
-        proficiencyClass: 'proficiency-expert',
-        description: 'Complex Queries, Indexing, Joins, Triggers'
       },
       {
         name: 'HTML5 & CSS3',
@@ -78,44 +63,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
         description: 'Components, Signals, RxJS, Dependency Injection'
       },
       {
-        name: 'React.js',
+        name: 'Spring Boot',
         category: 'frameworks',
-        iconClass: 'devicon-react-original colored',
+        iconClass: 'devicon-spring-plain colored',
         proficiency: 'Advanced',
         proficiencyClass: 'proficiency-expert',
-        description: 'Hooks, Virtual DOM, Component Architecture'
-      },
-      {
-        name: 'Next.js',
-        category: 'frameworks',
-        iconClass: 'devicon-nextjs-original',
-        proficiency: 'Proficient',
-        proficiencyClass: 'proficiency-advanced',
-        description: 'SSR, SSG, App Router, SEO Optimization'
-      },
-      {
-        name: 'Node.js',
-        category: 'frameworks',
-        iconClass: 'devicon-nodejs-plain colored',
-        proficiency: 'Advanced',
-        proficiencyClass: 'proficiency-expert',
-        description: 'RESTful Servers, Streams, Fast I/O'
-      },
-      {
-        name: 'Express.js',
-        category: 'frameworks',
-        iconClass: 'devicon-express-original',
-        proficiency: 'Advanced',
-        proficiencyClass: 'proficiency-expert',
-        description: 'Middlewares, Route Handlers, JWT Auth'
-      },
-      {
-        name: 'Redux Toolkit',
-        category: 'frameworks',
-        iconClass: 'devicon-redux-original colored',
-        proficiency: 'Proficient',
-        proficiencyClass: 'proficiency-advanced',
-        description: 'Global State Management, Slices, Thunks'
+        description: 'RESTful, JPA/Hibernate, Microservices'
       },
       {
         name: 'Tailwind CSS',
@@ -173,14 +126,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
         description: 'EC2, S3, IAM, CloudFront, Lambda Serverless'
       },
       {
-        name: 'Firebase',
-        category: 'database-cloud',
-        iconClass: 'devicon-firebase-plain colored',
-        proficiency: 'Proficient',
-        proficiencyClass: 'proficiency-advanced',
-        description: 'Authentication, Realtime Firestore, Cloud Hosting'
-      },
-      {
         name: 'Supabase',
         category: 'database-cloud',
         iconClass: 'fa-solid fa-bolt-lightning highlight-text',
@@ -223,10 +168,18 @@ export const SKILL_GROUPS: SkillGroup[] = [
       {
         name: 'Postman',
         category: 'dev-tools',
-        iconClass: 'devicon-postman-plain colored',
+        iconClass: 'devicon-postman-plain',
         proficiency: 'Advanced',
         proficiencyClass: 'proficiency-expert',
         description: 'API Testing, Automated Collections, Environment Variables'
+      },
+      {
+        name: 'IntelliJ IDEA',
+        category: 'dev-tools',
+        iconClass: 'devicon-intellij-plain colored',
+        proficiency: 'Mastery',
+        proficiencyClass: 'proficiency-expert',
+        description: 'JAVA Project, Debugging, Custom Workspace Configs'
       },
       {
         name: 'VS Code',
@@ -236,6 +189,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
         proficiencyClass: 'proficiency-expert',
         description: 'Profiling, Debugging, Custom Workspace Configs'
       },
+
       {
         name: 'Linux / Bash',
         category: 'dev-tools',
@@ -245,12 +199,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
         description: 'Shell Scripting, Process Management, Remote SSH'
       },
       {
-        name: 'Vite & npm',
+        name: 'Kafka',
         category: 'dev-tools',
-        iconClass: 'devicon-vitejs-plain colored',
+        iconClass: 'devicon-apachekafka-original',
         proficiency: 'Proficient',
         proficiencyClass: 'proficiency-advanced',
-        description: 'Bundling, Hot Module Reloading, Dependency Auditing'
+        description: 'Real-time data streaming,Distributed append-only log'
       }
     ]
   },
